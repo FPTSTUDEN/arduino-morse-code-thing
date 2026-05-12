@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "author": "ChatGPT",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd", "top": 220, "left": 300, "attrs": {} },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot1",
+      "top": 248.3,
+      "left": 191.8,
+      "attrs": { "value": "500" }
+    }
+  ],
+  "connections": [
+    [ "uno:5V", "lcd:VDD", "red", [] ],
+    [ "uno:GND", "lcd:VSS", "black", [] ],
+    [ "uno:GND", "lcd:RW", "black", [] ],
+    [ "pot1:VCC", "uno:5V", "red", [] ],
+    [ "pot1:GND", "uno:GND", "black", [] ],
+    [ "pot1:SIG", "lcd:VO", "purple", [] ],
+    [ "uno:12", "lcd:RS", "green", [] ],
+    [ "uno:11", "lcd:E", "cyan", [] ],
+    [ "uno:5", "lcd:D4", "blue", [] ],
+    [ "uno:4", "lcd:D5", "purple", [] ],
+    [ "uno:3", "lcd:D6", "teal", [] ],
+    [ "uno:2", "lcd:D7", "gray", [] ],
+    [ "uno:5V", "lcd:A", "red", [] ],
+    [ "uno:GND", "lcd:K", "black", [] ]
+  ],
+  "dependencies": {}
+}
