@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 value = 0
 
-# mở serial
+# open serial
 try:
     ser = serial.Serial('/dev/ttyACM0', 115200, timeout=0.1)
     time.sleep(2)
@@ -18,7 +18,7 @@ except Exception as e:
     ser = None
 
 
-# đọc dữ liệu Arduino
+# read data from Arduino
 def read_serial():
     global value
     while True:
