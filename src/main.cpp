@@ -14,7 +14,6 @@ unsigned long pressStart = 0;
 String morseText = "";
 
 void setup() {
-  // lcd.print("HELLO WORLD");
   pinMode(buttonPin, INPUT_PULLUP);
 
   lcd.begin(16, 2);
@@ -65,10 +64,10 @@ void loop() {
     morseText += symbol;
 
     // LCD
-    // lcd.clear();
+    lcd.clear();
 
-    // lcd.setCursor(0, 0);
-    // lcd.print("Morse:");
+    lcd.setCursor(0, 0);
+    lcd.print("Morse:");
 
     lcd.setCursor(0, 1);
 
