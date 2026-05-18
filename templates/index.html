@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Morse Reader</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        #morse {
+            font-size: 48px;
+            border: 2px solid black;
+            width: 500px;
+            margin: auto;
+            padding: 20px;
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Arduino Morse Input</h1>
+
+    <div id="morse"></div>
+
+    <script>
+        const morseBox =
+            document.getElementById("morse");
+
+        const eventSource =
+            new EventSource("/stream");
+
+        eventSource.onmessage = function(event) {
+            morseBox.innerText += event.data;
+        };
+    </script>
+
+</body>
+</html>
