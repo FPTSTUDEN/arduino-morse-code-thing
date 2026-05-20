@@ -5,7 +5,7 @@ import time
 app = Flask(__name__)
 
 # Change COM port to yours
-SERIAL_PORT = "COM7"
+SERIAL_PORT = "COM3"
 BAUD_RATE = 9600
 
 ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
