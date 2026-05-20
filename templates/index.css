@@ -2,6 +2,10 @@ body {
     background-image: url('pexels-pixabay-235985.jpg');
     background-size: cover;
     font-family: "Special Elite", system-ui;
+}
+
+h1 {
+    margin-top: 40px;
     font-weight: 400;
     font-style: normal;
     font-size: 50px;
@@ -10,7 +14,6 @@ body {
     text-decoration: underline 7px ;
     text-decoration-skip-ink: none;
     text-underline-offset: 25px;
-    
 }
 
 #morse {
@@ -21,5 +24,18 @@ body {
     margin: auto;
     padding: 20px;
     min-height: 60px;
+}
+
+#label {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
 }
 
