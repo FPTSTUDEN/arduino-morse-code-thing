@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <title>Morse Reader</title>
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        #morse {
-            font-size: 48px;
-            border: 2px solid black;
-            width: 500px;
-            margin: auto;
-            padding: 20px;
-            min-height: 60px;
-        }
-    </style>
 </head>
 <body>
 
-    <h1>Arduino Morse Input</h1>
+    <h1 id="header">Morse code reader</h1>
+    
+    <div id="main">
+        <div id="label">INPUT</div>
+        <div id="morse"></div>
+    </div>
 
-    <div id="morse"></div>
 
-    <script>
+    <script id="container">
         const morseBox =
             document.getElementById("morse");
 
