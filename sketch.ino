@@ -8,8 +8,15 @@ const int buttonPin = 7;
 const int minPress = 50;      // Ignore under 50ms
 const int dashThreshold = 400;
 
+// Pause detection
+const unsigned long spaceDelay = 1500;
+
 bool lastButtonState = HIGH;
+
 unsigned long pressStart = 0;
+unsigned long lastInputTime = 0;
+
+bool spaceSent = false;
 
 String morseText = "";
 
@@ -25,6 +32,8 @@ void setup() {
   // Prevent startup glitch
   lastButtonState =
     digitalRead(buttonPin);
+
+  lastInputTime = millis();
 }
 
 void loop() {
@@ -46,48 +55,57 @@ void loop() {
     unsigned long pressDuration =
       millis() - pressStart;
 
-    char symbol;
+    // Ignore bounce (<50ms)
+    if (pressDuration >= minPress) {
 
-    // Ignore tiny presses (<50ms)
-    if (pressDuration < minPress) {
-      lastButtonState =
-        currentButtonState;
-      return;
-    }
+      char symbol;
 
-    // Dot or dash
-    if (pressDuration < dashThreshold) {
-      symbol = '.';
-    } else {
-      symbol = '-';
-    }
+      // Dot or dash
+      if (pressDuration < dashThreshold) {
+        symbol = '.';
+      } else {
+        symbol = '-';
+      }
 
-    morseText += symbol;
+      morseText += symbol;
 
-    // LCD
-    // lcd.clear();
+      Serial.print(symbol);
 
-    // lcd.setCursor(0, 0);
-    // lcd.print("Morse:");
+      // Reset space timer
+      lastInputTime = millis();
+      spaceSent = false;
 
-    lcd.setCursor(0, 1);
+      // LCD update
+      lcd.clear();
+
+      lcd.setCursor(0, 0);
+      lcd.print("Morse:");
+
+      lcd.setCursor(0, 1);
 
     // Show only last 16 chars
-    if (morseText.length() > 16) {
-      lcd.print(
-        morseText.substring(
-          morseText.length() - 16
-        )
-      );
-    } else {
-      lcd.print(morseText);
+      if (morseText.length() > 16) {
+        lcd.print(
+          morseText.substring(
+            morseText.length() - 16
+          )
+        );
+      } else {
+        lcd.print(morseText);
+      }
     }
+  }
 
-    // Serial monitor
-    Serial.print(symbol);
-    Serial.print("  (");
-    Serial.print(pressDuration);
-    Serial.println(" ms)");
+  // Space detection
+  if (!spaceSent &&
+      millis() - lastInputTime >
+      spaceDelay) {
+
+    Serial.print(" ");
+
+    morseText += " ";
+
+    spaceSent = true;
   }
 
   lastButtonState =
