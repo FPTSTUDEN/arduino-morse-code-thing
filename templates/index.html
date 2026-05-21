@@ -12,20 +12,74 @@
     <h1 id="header">Morse code reader</h1>
     
     <div id="main">
-        <div id="label">INPUT</div>
-        <div id="morse"></div>
+        <div class="box-block">
+            <div class="label">INPUT</div>
+            <div id="input" class="text-box"></div>
+        </div>
+        <div class="box-block">
+            <div class="label">OUTPUT</div>
+            <div id="output" class="text-box"></div>
+        </div>
     </div>
 
+    <section id="dictionary">
+        <div class="dict-header">The basic letters:</div>
+        <div class="dict-grid">
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">A</span>.-</div>
+                <div class="dict-item"><span class="dict-char">B</span>-...</div>
+                <div class="dict-item"><span class="dict-char">C</span>-.-.</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">D</span>-..</div>
+                <div class="dict-item"><span class="dict-char">E</span>.</div>
+                <div class="dict-item"><span class="dict-char">F</span>..-.</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">G</span>--.</div>
+                <div class="dict-item"><span class="dict-char">H</span>....</div>
+                <div class="dict-item"><span class="dict-char">I</span>..</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">J</span>.---</div>
+                <div class="dict-item"><span class="dict-char">K</span>-.-</div>
+                <div class="dict-item"><span class="dict-char">L</span>.-..</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">M</span>--</div>
+                <div class="dict-item"><span class="dict-char">N</span>-.</div>
+                <div class="dict-item"><span class="dict-char">O</span>---</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">P</span>.--.</div>
+                <div class="dict-item"><span class="dict-char">Q</span>--.-</div>
+                <div class="dict-item"><span class="dict-char">R</span>.-.</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">S</span>...</div>
+                <div class="dict-item"><span class="dict-char">T</span>-</div>
+                <div class="dict-item"><span class="dict-char">U</span>..-</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">V</span>...-</div>
+                <div class="dict-item"><span class="dict-char">W</span>.--</div>
+                <div class="dict-item"><span class="dict-char">X</span>-..-</div>
+            </div>
+            <div class="dict-column">
+                <div class="dict-item"><span class="dict-char">Y</span>-.--</div>
+                <div class="dict-item"><span class="dict-char">Z</span>--..</div>
+            </div>
+        </div>
+    </section>
 
     <script id="container">
-        const morseBox =
-            document.getElementById("morse");
+        const outputBox = document.getElementById("output");
 
         const eventSource =
             new EventSource("/stream");
 
         eventSource.onmessage = function(event) {
-            morseBox.innerText += event.data;
+            outputBox.innerText += event.data;
         };
     </script>
 
