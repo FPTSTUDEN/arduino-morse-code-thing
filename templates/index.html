@@ -73,13 +73,57 @@
     </section>
 
     <script id="container">
+        function translateMorse(morse) {
+            const morseDict = {
+                ".-": "A",
+                "-...": "B",
+                "-.-.": "C",
+                "-..": "D",
+                ".": "E",
+                "..-.": "F",
+                "--.": "G",
+                "....": "H",
+                "..": "I",
+                ".---": "J",
+                "-.-": "K",
+                ".-..": "L",
+                "--": "M",
+                "-.": "N",
+                "---": "O",
+                ".--.": "P",
+                "--.-": "Q",
+                ".-.": "R",
+                "...": "S",
+                "-": "T",
+                "..-": "U",
+                "...-": "V",
+                ".--": "W",
+                "-..-": "X",
+                "-.--": "Y",
+                "--..": "Z"
+            };
+            return morseDict[morse] || "?";
+        }
+        const inputBox = document.getElementById("input");
         const outputBox = document.getElementById("output");
-
+        console.log("Connecting to server...");
+        let morseLetter="";
         const eventSource =
-            new EventSource("/stream");
+            new EventSource("http://127.0.0.1:5000/stream");
 
         eventSource.onmessage = function(event) {
-            outputBox.innerText += event.data;
+            let eventdata=event.data;
+            inputBox.innerText += eventdata;
+            console.log("Received data:", eventdata);
+            
+            if (eventdata === " " || eventdata === "\n" || eventdata === "\r") {
+                console.log("Translating Morse letter:", morseLetter);
+                // strip first and last spaces and newlines just in case
+                morseLetter = morseLetter.trim();
+                outputBox.innerText += translateMorse(morseLetter);
+                morseLetter = "";
+            }
+            morseLetter += eventdata;
         };
     </script>
 
